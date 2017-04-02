@@ -1,20 +1,17 @@
 <?php
 // Options Vars
-$spreadsheet_url = get_option('sheets_url');
+$spreadsheet_url = get_option( 'sheets_url' );
 
- /**
+/**
  * Preview Headers Information
- **/
+ */
 echo '<em>To help, here are your column headers: </em>';
-	
-	$csv = array_map('str_getcsv', file($spreadsheet_url));
-	array_walk($csv, function(&$a) use ($csv) {
-	      $a = array_combine($csv[0], $a);
-	    });
-	    //array_shift($csv); # remove column header
 
+// Pull the CSV file and parse it into an array.
+// NOTE:  This should be switched out for fgetcsv instead, 
+// as in processing.php line 61.	
+$csv = array_map( 'str_getcsv', file( $spreadsheet_url ) );
 
-	$string = implode(",", $csv[0]);
-	echo '<code>'.$string.'</code>';
-
-?>
+// Get only the first row of header data.
+$string = implode( ",", $csv[0] );
+echo '<code>' . $string . '</code>';

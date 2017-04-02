@@ -1,8 +1,8 @@
 === Import Posts from Google Sheets ===
-Contributors: thenorthernfoundry
+Contributors: thenorthernfoundry, pkarjala
 Tags: Google Sheets, Mass Upload Posts, Importer
 Requires at least: 4.0
-Tested up to: 4.5.3
+Tested up to: 4.7
 License: GPLv2
 
 This plugin can be used to upload any Google Sheet to create Posts, Custom Post Types, Taxonomies, Categories and Custom Post Meta. 
@@ -20,5 +20,11 @@ Easy to map columns from your google sheet with Taxonomies, Categories and Custo
 3. Map Your fields
 4. Import!
 
-= 1.0.0 =
-* Initial release of plugin.
+= 1.0.3 =
+* Forked from original project; cleaned up codebase.
+
+= 1.0.2 =
+* Added Featured Image Upload from file, also media bulk delete.
+
+= 1.0.1 =
+* Initial release.

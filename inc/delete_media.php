@@ -1,18 +1,21 @@
 <?php 
 
-	global $wpdb;
-	global $post;
+global $wpdb;
+global $post;
 
-	// Options Vars
-	
-	$number_delete = get_option('g_delete_posts');
+// Options Vars
+$number_delete = get_option( 'g_delete_posts' );
 
+// Only allow users who have the capability to delete posts.
+if( !current_user_can( 'delete_posts' ) ) {
+	return;
+} else {
 
 	echo '<h1>Bulk Delete Media</h1>';
 	echo '<i>Please dont use this on a production site, you would be a mentalist to do so! TESTING ONLY PLEASE</i>';
 	echo '<div class="upload-form">';
 	echo '</br>';
-	echo '<a class="button button-error" style="padding:1em 3em;  height:auto;" href="'.$_SERVER['REQUEST_URI'].'&delete_attachment">Delete Media</a>';
+	echo '<a class="button button-error" style="padding:1em 3em;  height:auto;" href="' . $_SERVER['REQUEST_URI'] . '&delete_attachment">Delete Media</a>';
 	echo '</div>';
 
 	if ( ! isset( $_GET["delete_attachment"] ) ) {
@@ -20,20 +23,21 @@
 	}
 
 	$args = array(
-	'numberposts' => $number_delete,
-	'post_type' => 'attachment'
+		'numberposts' => $number_delete,
+		'post_type' => 'attachment'
 	);
 	$posts = get_posts( $args );
-	if (is_array($posts)) {
-	   foreach ($posts as $post) {
-	// what you want to do;
-	       wp_delete_post( $post->ID, true);
-	   }
+	if ( is_array( $posts ) ) {
+		foreach ( $posts as $post ) {
+			// what you want to do;
+			wp_delete_post( $post->ID, true);
+		}
 
-	   	   echo "<div class='updated'>";
-		   echo "<p>";
-	       echo "Deleted Media</br>";
-	       echo "</p>";
-	       echo "</div>";
+		echo "<div class='updated'>";
+		echo "<p>";
+		echo "Deleted Media</br>";
+		echo "</p>";
+		echo "</div>";
 
-	}?>
+	}
+}
